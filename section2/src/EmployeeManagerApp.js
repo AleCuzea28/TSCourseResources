@@ -1,31 +1,25 @@
-var employees = [];
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var getRandomInt = function (min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
-var addEmployee = function (givenName, givenEmail, givenSalary) {
-    var newEmployee = {
+var addEmployee = function (givenName, givenSalary) {
+    return {
         id: getRandomInt(1000, 9999),
         name: givenName,
-        email: givenEmail,
+        email: "".concat(givenName, "@coolcompany.com"), //very cool
         salary: givenSalary,
     };
-    employees.push(newEmployee);
 };
-var sendWelcomeEmail = function (givenEmail) {
-    console.log("message sent to " + givenEmail);
+var sendWelcomeEmail = function (employee) {
+    console.log("message sent to ".concat(employee.email));
     console.log("--------------------------------");
     console.log("Welcome on board!!!\n");
 };
-var sendEmailToAll = function () {
-    employees.forEach(function (employee) {
-        sendWelcomeEmail(employee.email);
-    });
-};
 //example
-addEmployee("John", "john@gmail.com", 4000);
-addEmployee("Ella", "ella@gmail.com", 8790);
-addEmployee("Dab", "dabb@gmail.com", 2040);
-addEmployee("Sellah", "sel@gmail.com", 6500);
-sendEmailToAll();
+var John = addEmployee("John", 4000);
+var Ella = addEmployee("Ella", 8000);
+var newEmployees = [John, Ella];
+newEmployees.forEach(function (employee) { return sendWelcomeEmail(employee); });

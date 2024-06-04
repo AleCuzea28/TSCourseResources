@@ -5,45 +5,30 @@ export type Employee = {
   salary: number;
 };
 
-let employees: Employee[] = [];
-
 const getRandomInt = (min: number, max: number): number => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const addEmployee = (
-  givenName: string,
-  givenEmail: string,
-  givenSalary: number
-) => {
-  const newEmployee: Employee = {
+const addEmployee = (givenName: string, givenSalary: number): Employee => {
+  return {
     id: getRandomInt(1000, 9999),
     name: givenName,
-    email: givenEmail,
+    email: `${givenName}@coolcompany.com`, //very cool
     salary: givenSalary,
   };
-  employees.push(newEmployee);
 };
 
-const sendWelcomeEmail = (givenEmail: string) => {
-  console.log("message sent to " + givenEmail);
+const sendWelcomeEmail = (employee: Employee) => {
+  console.log(`message sent to ${employee.email}`);
   console.log("--------------------------------");
   console.log("Welcome on board!!!\n");
 };
 
-const sendEmailToAll = () => {
-  employees.forEach((employee) => {
-    sendWelcomeEmail(employee.email);
-  });
-};
-
 //example
+const John = addEmployee("John", 4000);
+const Ella = addEmployee("Ella", 8000);
 
-addEmployee("John", "john@gmail.com", 4000);
-addEmployee("Ella", "ella@gmail.com", 8790);
-addEmployee("Dab", "dabb@gmail.com", 2040);
-addEmployee("Sellah", "sel@gmail.com", 6500);
-
-sendEmailToAll();
+const newEmployees = [John, Ella];
+newEmployees.forEach((employee) => sendWelcomeEmail(employee));
